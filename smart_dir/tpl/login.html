@@ -1,0 +1,65 @@
+<div class="win-login">
+  <section class="login-info">
+    <div class="alert alert-info alert-dismissible" role="alert">
+      <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {if $have_root }
+      <strong>Warning!</strong>请不要轻易使用超级账户登录！
+      {else}
+      <strong>Warning!</strong>请注册一个超级用户！
+      {/if}
+    </div>
+    {if $have_root }
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      如果你想成为管理员，请超级用户为你注册管理员账号！
+    </div>
+    {/if}
+  </section>
+  <form class="main-login userform">
+    <div class="form-box">
+      <div class="form-group user-input">
+        {if $have_root}
+        <label for="user-log">用户名</label>
+        <input type="text" class="form-control" id="user-log" name="username" placeholder="注册用户名">
+        {else}
+        <label for="user">用户名</label>
+        <input type="text" class="form-control" id="user" name="username" placeholder="注册用户名">
+        {/if}
+      </div>
+      <div class="form-group">
+        {if $have_root}
+        <label for="psw-log">密码</label>
+        <input type="password" class="form-control" id="psw-log" name="password" placeholder="">
+        {else}
+        <label for="psw">密码</label>
+        <input type="password" class="form-control" id="psw" name="password" placeholder="">
+        {/if}
+      </div>
+      {if !$have_root}
+      <div class="form-group">
+        <label for="psw_r">再一次输入密码</label>
+        <input type="password" class="form-control" id="psw_r" placeholder="再输入一次密码">
+      </div>
+      {/if}
+      <div class="form-group captchar-input">
+        <label for="captchar">请输入验证码 <a class="change-captchar" href="javascript:void(0);">换一个</a></label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="captchar" placeholder="输入右侧验证码">
+          <span class="input-group-addon captchar-box">
+            <img class="captchar-img" src="./enter/captchar.php" alt="识别码">
+          </span>
+        </div>
+      </div>
+      {if !$have_root}
+      <input type="hidden" name="power" value="root">
+      {/if}
+    </div>
+    {if $have_root}
+    <button type="button" class="btn btn-primary btn-sub btn-log">登录</button>
+    {else}
+    <button type="button" class="btn btn-primary btn-sub btn-root">注册超级用户</button>
+    {/if}
+  </form>
+  <div class="canvas"></div>
+</div>
+<script src="static/js/form.js"></script>

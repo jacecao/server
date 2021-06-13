@@ -1,0 +1,128 @@
+<div class="ctrl">
+  <button type="button" class="btn btn-info form-edit">编辑</button>
+  <button type="button" class="btn btn-info form-cancel" disabled>取消编辑</button>
+</div>
+<form class="huizhan-form form-reset form-static">
+  <h3>{$title}会展中心</h3><hr>
+  <div class="form-group">
+    <label for="show_huizhan_{$title}">是否在页面显示</label>
+    <div class="time_box">
+      {if isset($display) && $display}
+      <input type="checkbox" class="checkbox_show" id="show_huizhan_{$title}" style="display: inline-block; height: 20px; width: 20px;" name="isshow" data-id="1" value="1" checked>
+      {else}
+      <input type="checkbox" class="checkbox_show" id="show_huizhan_{$title}" style="display:inline-block; height: 20px; width: 20px;" name="isshow" data-id="1" value="1">
+      {/if}
+      <i class="tip-info" style="color:;">(勾选此框在页面显示)</i>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="huizhan-name">会展中心名称</label>
+    <input type="text" class="form-control" id="huizhan-name" name="name" placeholder="title" value="{$name|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="bgimg">会展中心封面图片</label>
+    <div class="row">
+      <div class="show_image">
+        {if isset($poster)}
+        <img class="scan-img scan-img-huizhan-post" src="{$poster.img_url}" alt="封面图片">
+        {else}
+        <img class="scan-img scan-img-huizhan-post" src="" alt="封面图片">
+        {/if}
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-default btn-check">选择图片文件
+          <input class="fileinput fileinput_huizhan-post" type="file" name="postimg" data-id="huizhan-post">
+        </button>
+        <span class="imgname filename_huizhan-post"></span>
+      </div>
+      <div class="huizhan-post-box">
+        {if isset($poster)}
+        <div class="huizhan-post-info-old">
+          <input type="hidden" name="post_id" value="{$poster.img_id|default: ''}">
+          <input type="hidden" name="post_name" value="{$poster.img_name|default: ''}">
+          <input type="hidden" name="post_url" value="{$poster.img_url|default: ''}">
+        </div>
+        {/if}
+      </div>
+      <button type="button" class="btn btn-info col-md-1 up-{$style}-huizhan-post" data-id="huizhan-post">上传</button>
+
+      <button type="button" class="btn btn-primary col-md-2 col-md-offset-1 choose choose-{$style}-huizhan-post" data-toggle="modal" data-id="huizhan-post" data-dir="{$style}_huizhan" data-target="#choosefile" >选择图片</button>
+    </div>
+    <label class="desc-label">添加封面描述</label>
+     {if isset($poster)}
+    <input type="text" class="form-control desc-huizhan-post" name="post_desc" placeholder="简要说明" value="{$poster.img_desc|default: ''}">
+    {else}
+    <input type="text" class="form-control desc-huizhan-post" name="post_desc" placeholder="huizhan-desc">
+    {/if}
+  </div>
+  <div class="form-group">
+    <label for="bgimg">添加其他图片</label>
+    <div class="add-img">
+      {if isset($images) and !empty($images)}
+        <div class="row">
+        {foreach $images as $image}
+          <div class="col-md-6 scan-box-{$image@index}">
+            <div class="show_image">
+              <img class="scan-img" src="{$image.img_url}" alt="{$image.img_url}" title="{$image.img_desc}">
+              <button type="button" class="btn btn-warning del-scan" data-id="{$image@index}"><span class="glyphicon glyphicon-trash"></span></button>
+            </div>
+            <div class="img-info">
+              <input type="hidden" name="img_id[]" value="{$image.img_id|default:''}">
+              <input type="hidden" name="img_url[]" value="{$image.img_url|default:''}">
+              <input type="hidden" name="img_name[]" value="{$image.img_name|default:''}">
+              <input type="hidden" name="img_desc[]" value="{$image.img_desc|default:''}">
+            </div>
+          </div>
+        {/foreach}
+        </div>
+      {else}
+        <div class="row row-0">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-default btn-check">上传图片
+              <input class="fileinput fileinput_0" type="file" name="img" data-id="0">
+            </button>
+            <span class="imgname filename_0"></span>
+          </div>
+          <button type="button" class="btn btn-info col-md-1 up-{$style}-huizhan" data-id="0">上传</button>
+          <button type="button" class="btn btn-primary col-md-2 col-md-offset-1 choose choose-huizhan" data-toggle="modal" data-id="0" data-dir="{$style}_huizhan" data-target="#choosefile">选择图片</button>
+        </div>
+        <label class="desc-label">添加图片描述</label>
+        <input type="text" class="form-control desc-0" name="img_desc_new[]" placeholder="img-desc">
+      {/if}
+    </div>
+    <div class="add-box"></div>
+    <div class="add-btn">
+      <button class="add addimg-{$style}-huizhan btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="editor-content">会展中心介绍<i class="tip-info">(仅支持文本编辑)</i></label>
+    <script id="editor-content" name="content" type="text/plain" style="width: 650px;">{$content|default:''}</script>
+  </div>
+  {if isset($id)}
+  <input type="hidden" name="id" value="{$id}">
+  {/if}
+  <button type="button" class="btn btn-warning sub-{$style}-huizhan" data-id="{$id|default:''}">提交数据</button>
+</form>
+<!-- 图片选择弹出框 -->
+<div class="modal fade" id="choosefile" tabindex="-1" role="dialog" aria-labelledby="choosefile">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">请挑选图片</h4>
+      </div>
+      <div class="modal-body choose-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary choose-ok">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  createUE('editor-content'); 
+</script>
+<script type="text/javascript" src="static/js/mainform.js"></script>
+<script type="text/javascript" src="static/js/control.js"></script>

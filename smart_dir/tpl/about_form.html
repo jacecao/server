@@ -1,0 +1,32 @@
+<div class="ctrl">
+  <button type="button" class="btn btn-info form-edit">编辑</button>
+  <button type="button" class="btn btn-info form-cancel" disabled>取消编辑</button>
+</div>
+
+<form class="about-form form-reset form-static">
+  <h3>关于我们</h3><hr>
+  <div class="form-group">
+    <label>我们的愿景</label>
+    {if isset($tjhzs) && is_array($tjhzs[0].content)}
+    <script id="about_future" name="future_note" type="text/plain" style="width: 650px;">{implode(' ', $tjhzs[0].content)|default:' '}</script>
+    {else}
+    <script id="about_future" name="future_note" type="text/plain" style="width: 650px;">{$tjhzs[0].content|default:' '}</script>
+    {/if}  
+  </div>
+  <div class="form-group">
+    <label>关于我们</label>
+    {if isset($tjhzs) && is_array($tjhzs[1].content)}
+    <script id="about_us" name="about_note" type="text/plain" style="width: 650px;">{implode(' ', $tjhzs[1].content)|default:' '}</script>
+    {else}
+    <script id="about_us" name="about_note" type="text/plain" style="width: 650px;">{$tjhzs[1].content|default:' '}</script>
+    {/if}  
+  </div>
+  <button type="button" class="btn btn-warning sub-about">保存</button>
+</form>
+<script type="text/javascript">
+  createUE('about_future');
+  createUE('about_us');
+</script> 
+<script type="text/javascript" src="static/js/mainform.js"></script>
+<script type="text/javascript" src="static/js/control.js"></script>
+

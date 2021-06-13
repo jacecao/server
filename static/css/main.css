@@ -1,0 +1,252 @@
+label i.tip-info, div.time_box i.tip-info{
+  color: #d80a55;
+  padding-left: 20px;
+  font-size: 14px;
+  font-style: normal;
+}   
+
+/* 顶部导航 */
+#user-info {
+  /* font-size: 18px; */
+}
+#user-info span{
+  /* font-size: 18px; */
+  padding-right: 12px;
+  color: #ffc107;
+}
+.navbar-logo {
+  position: relative;
+  top: -12px;
+  left: 16px;
+}
+/* 操作窗口布局 */
+#app-body {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  /* align-items 如果设为默认属性 那么子元素高度就会彼此影响 */
+  align-items: flex-start;
+  width: 90%;
+  min-width: 921px;
+  max-width: 1200px;
+}
+
+#exit {
+  color: #fff;
+}
+#exit:hover {
+  color: #e91e63;
+}
+
+.win-login {
+  width: 90%;
+  margin: 30px auto;
+}
+.win-left {
+  width: 20%;
+}
+.win-right {
+  width: 70%;
+}
+
+
+.btn-check {
+  position: relative;
+  /* width: 100px; */
+  height: 33px;
+}
+.main-login {
+  background-color: #4caf50;
+  width: 300px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+.login-info {
+  margin: 0 auto;
+  overflow: hidden;
+}
+.login-info > div {
+  float: left;
+  margin-left: 10px;
+}
+
+.change-captchar {
+  padding-left: 15px;
+}
+.captchar-box {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.captchar-img {
+  height: 30px;
+  width: 100px;
+}
+
+.btn-sub {
+  display: block;
+  width: 110px;
+  margin: 20px auto 0 auto;
+}
+
+.left-menu {
+  font-size: 20px;
+  line-height: 40px;
+  text-align: left;
+}
+.vertical-menu {
+  width: 100%;
+}
+.btn-group-vertical .icon-down::before {
+  vertical-align: sub;
+  margin-left: 10px;
+}
+
+.control-win {
+  position: relative;
+  margin:0 0 20px 20px;
+  padding: 10px;
+  min-height: 600px;
+}
+
+.ctrl {
+  position: absolute;
+  width: 144px;
+  right: 100px;
+  top: 20px;
+  z-index: 900;
+}
+
+.result {
+  margin-top: 60px;
+}
+/* 图片浏览样式 */
+.choose-body {
+  height: 370px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 所有表单样式 */
+form {
+  /* padding: 14px; */
+  margin: 0;
+}
+.form-reset h3 {
+  margin: 0;
+}
+.choose-box li{
+  width: 350px;
+  padding: 10px;
+  margin: 0 auto;
+}
+.choose-box li img {
+  width: 300px;
+  height: 150px;
+}
+[name='checkfile'] {
+  width: 20px;
+  height: 20px;
+}
+.bgimg {
+  cursor: pointer;
+}
+
+
+/* 导航条设置 */
+.radio-box {
+  display: inline-block;
+}
+input.color-radio {
+  margin-left: 30px;
+}
+.color-info,
+.color-radio {
+  vertical-align: middle;
+}
+.color-info {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ddd;
+}
+.color-white {
+  background-color: #fff;
+}
+.color-black {
+  background-color: #000;
+}
+
+/* 管理员 */
+.form-reset {
+  padding-right: 50px;
+}
+.form-reset, .data-list {
+  /* height: 500px; */
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 添加新闻 */
+.add-img + .add-img {
+  margin-top: 10px;
+}
+.add {
+    width: 80px;
+    margin: auto 0;
+    height: 34px;
+    font-size: 12px;
+    outline: none;
+}
+.add-btn {
+  text-align: center;
+  margin-top: 10px;
+  outline: none;
+}
+.note + .note {
+  margin-top: 10px;
+}
+/* 添加图片描述 */
+.desc-label {
+  font-weight: normal;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+.add-img {
+  padding-top: 10px;
+}
+
+/* 表单提示信息 */
+.text-danger {
+  padding-top: 10px;
+  color: #e91e63;
+}
+.imgname, #myModalLabel {
+  color: #e91e63;
+}
+
+/* 图片移除 */
+.remove-img {
+  margin-left: 20px;
+}
+.remove-img span {
+  line-height: inherit;
+}
+
+/* 图片浏览 */
+.show_image {
+  position: relative;
+  width: 300px;
+  margin: 10px auto;
+}
+.scan-img {
+  width: 100%;
+}
+.del-scan {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}

@@ -1,0 +1,131 @@
+<div class="ctrl">
+  <button type="button" class="btn btn-info form-edit">编辑</button>
+  <button type="button" class="btn btn-info form-cancel" disabled>取消编辑</button>
+</div>
+<form class="show-form header-form form-reset form-static">
+  <h3>展会信息设置</h3><hr>
+  <div class="form-group">
+    <label for="show_time">是否显示时间计时框</label>
+    <div class="time_box">
+      {if isset($showtime) && $showtime}
+      <input type="checkbox" class="checkbox_show_time" style="display: inline-block; height: 20px; width: 20px;" name="showtime" data-id="1" value="1" checked>
+      {else}
+      <input type="checkbox" class="checkbox_show_time" style="display:inline-block; height: 20px; width: 20px;" name="showtime" data-id="1" value="1">
+      {/if}
+      <i class="tip-info" style="color:;">(勾选此框页面显示计时框)</i>
+    </div>
+    
+  </div>
+  <div class="form-group">
+    <label for="city">举办城市</label>
+    <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{$city|default: '成都'}">
+  </div>
+  <div class="form-group">
+   <label for="season">举办季节</label>
+   <input type="text" class="form-control" id="season" name="season" placeholder="Season" value="{$season|default: '春季'}">
+  </div>
+  <div class="form-group">
+   <label for="readytime">布展时间</label>
+   <input type="text" class="form-control" id="readytime" name="readytime" placeholder="填写格式：2017-04-12" value="{$readytime|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="starttime">开展时间</label>
+    <input type="text" class="form-control" id="starttime" name="starttime" placeholder="填写格式：2017-10-12" value="{$starttime|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="addr">举办地址</label>
+    <input type="text" class="form-control" id="addr" name="addr" placeholder="举办地址" value="{$addr|default: '成都新会展中心'}">
+  </div>
+  <div class="form-group">
+    <label for="zhuban">主办方</label>
+    <input type="text" class="form-control" id="zhuban" name="zhuban" placeholder="主办方" value="{$zhuban|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="chenban">承办方<i class="tip-info">(若有多个单位则使用"+"隔开)</i></label>
+    <input type="text" class="form-control" id="chenban" name="chenban" placeholder="Chenban" value="{$chenban|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="xieban">协办方<i class="tip-info">(若有多个单位则使用"+"隔开)</i></label>
+    <input type="text" class="form-control" id="xieban" name="xieban" placeholder="协办方" value="{$xieban|default: ''}">
+  </div>
+  <div class="form-group">
+    <label for="imgfile">上传主页顶部图片</label>
+    <div class="add-img">
+      {if isset($bgimg) and !empty($bgimg)}
+      <div class="row">
+        <!-- 这里需要判断的是bgimg是不是多维数组 -->
+        <!-- 所以这里需要添加isset($bgimg[0].img_id)来判断是不是多维数组 -->
+        {if is_array($bgimg) and isset($bgimg[0].img_id)}
+        {foreach $bgimg as $image}
+        <div class="col-md-6 scan-box-{$image@index}">
+          <div class="show_image">
+            <img class="scan-img scan-img-post" src="{$image.img_url}" title="{$image.img_desc}">
+            <button type="button" class="btn btn-warning del-scan" data-id="{$image@index}"><span class="glyphicon glyphicon-trash"></span></button>
+          </div>
+          <div class="img-info">
+            <input type="hidden" name="img_id[]" value="{$image.img_id|default:''}">
+            <input type="hidden" name="img_url[]" value="{$image.img_url|default:''}">
+            <input type="hidden" name="img_name[]" value="{$image.img_name|default:''}">
+            <input type="hidden" name="img_desc[]" value="{$image.img_desc|default:'header image'}">
+          </div>
+        </div>
+        {/foreach}
+        {else}
+        <div class="col-md-6">
+          <div class="show_image">
+            <img class="scan-img scan-img-post" src="{$bgimg.img_url}" title="{$bgimg.img_desc}">
+            <button type="button" class="btn btn-warning del-scan" data-id="{$bgimg.img_id}"><span class="glyphicon glyphicon-trash"></span></button>
+          </div>
+          <div class="img-info">
+            <input type="hidden" name="img_id[]" value="{$bgimg.img_id|default:''}">
+            <input type="hidden" name="img_url[]" value="{$bgimg.img_url|default:''}">
+            <input type="hidden" name="img_name[]" value="{$bgimg.img_name|default:''}">
+            <input type="hidden" name="img_desc[]" value="{$bgimg.img_desc|default:'header image'}">
+          </div>
+        </div>  
+        {/if}
+      </div>
+      {else}
+      <div class="row">
+        <div class="show_image">
+          <img class="scan-img scan-img-post" src="{$bgimg.img_url|default: '请上传图片'}">
+        </div>
+        <div class="col-md-6">
+          <button type="button" class="btn btn-default btn-check" disabled>上传图片
+            <input class="fileinput fileinput_post" type="file" name="postimg" data-id="post">
+          </button>
+          <span class="imgname filename_post">{$bgimg.img_name|default: '请上传图片'}</span>
+        </div>
+        <button type="button" class="btn btn-info col-md-1 up-header-post" data-id="post" disabled>上传</button>
+        <button type="button" class="btn btn-primary col-md-2 col-md-offset-1 choose choose-header-post" data-toggle="modal" data-id="header-post" data-dir="header" data-target="#choosefile" >选择图片</button>
+      </div>
+      {/if}
+    </div>
+    <div class="add-box"></div>
+    <div class="post-box"></div>
+    <div class="add-btn">
+      <button class="add addimg-header btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <button type="button" class="btn btn-warning sub-header">保存</button>
+</form>
+
+<div class="modal fade" id="choosefile" tabindex="-1" role="dialog" aria-labelledby="choosefile">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">请挑选图片</h4>
+      </div>
+      <div class="modal-body choose-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary choose-ok">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="static/js/mainform.js"></script>
+<script type="text/javascript" src="static/js/control.js"></script>

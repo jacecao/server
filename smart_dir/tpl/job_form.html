@@ -1,0 +1,38 @@
+
+  <form class="job-form form-reset">
+    <h3>招聘发布</h3><hr>
+    <div class="form-group">
+      <label>岗位名称</label>
+      <input type="text" class="form-control" name="name" placeholder="岗位名称" value="{$name|default:''}">
+    </div>
+    <div class="form-group">
+      <label>工作简述</label>
+      <input type="text" class="form-control" name="job_note" placeholder="职位简要说明" value="{$note|default:''}">
+    </div>
+    <div class="form-group">
+      <label>工作地点</label>
+      <input type="text" class="form-control" name="job_loc" placeholder="工作地点" value="{$loc|default:''}">
+    </div>
+    <div class="form-group">
+      <label>工作要求</label>
+      <script id="jobReq" name="job_req" type="text/plain" style="width: 650px;">{$req|default:'工作要求'}</script>
+    </div>
+    <div class="form-group">
+      <label>工作描述</label>
+      {if isset($des) && is_array($des)}
+      <script id="jobDes" name="job_des" type="text/plain" style="width: 650px;">{implode(' ', $des)|default:'工作描述'}</script>
+      {else}
+      <script id="jobDes" name="job_des" type="text/plain" style="width: 650px;">{$des|default:'工作描述'}</script>
+      {/if}  
+    </div>
+      {if isset($id)}
+      <input type="hidden" name="id" value="{$id}">
+      {/if}
+    <button type="button" class="btn btn-warning sub-job" data-id="{$id|default:''}">提交</button>
+  </form>
+<script type="text/javascript">
+  createUE('jobReq');
+  createUE('jobDes');
+</script>  
+<script src="static/js/mainform.js"></script>
+<script src="static/js/control.js"></script>

@@ -1,0 +1,102 @@
+<div class="ctrl">
+  <button type="button" class="btn btn-info form-edit">编辑</button>
+  <button type="button" class="btn btn-info form-cancel" disabled>取消编辑</button>
+</div>
+  <form class="web-form form-reset form-static">
+    <h3>网页底部信息设置</h3><hr>
+    <fieldset>
+      <legend><strong>网页信息</strong></legend>
+      <div class="form-group">
+        <label>公司名字</label>
+        <input type="text" class="form-control" name="name" placeholder="公司名字" value="{$webinfo.name|default:''}">
+      </div>
+      <div class="form-group">
+        <label>公司地址</label>
+        <input type="text" class="form-control" name="address" placeholder="公司地址" value="{$webinfo.address|default:''}">
+      </div>
+      <div class="form-group">
+        <label>网站备案号</label>
+        <input type="text" class="form-control" name="number" placeholder="网站备案号" value="{$webinfo.number|default:''}">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend><strong>其他信息-1</strong></legend>
+      <div class="form-group">
+        <label>大标题</label>
+        {if isset($blockinfo[0])}
+        <input type="text" class="form-control" name="title_1" placeholder="title" value="{$blockinfo[0].title}">
+        {else}
+        <input type="text" class="form-control" name="title_1" placeholder="title">
+        {/if}
+      </div>
+      <div class="form-group">
+        <label>小标题</label>
+        {if isset($blockinfo[0])}
+        <input type="text" class="form-control" name="small_title_1" placeholder="small_title" value="{$blockinfo[0].smalltitle}">
+        {else}
+        <input type="text" class="form-control" name="small_title_1" placeholder="small_title">
+        {/if}
+      </div>
+      <div class="form-group">
+        <label>是否为链接</label>
+        {if isset($blockinfo[0]) && $blockinfo[0].link}
+        <input type="checkbox" class="is-link" name="is_link_1" data-id="1" value="true" checked>
+        {else}
+        <input type="checkbox" class="is-link" name="is_link_1" data-id="1" value="true">
+        {/if}
+      </div>
+      <div class="form-group link-box-1"><!-- 动态传入 -->
+        {if isset($blockinfo[0]) && $blockinfo[0].link}
+        <div class="link-body-1">
+          <div class="form-group">
+            <label>链接地址</label>
+            <input type="text" class="form-control" name="link_url_1" placeholder="url" value="{$blockinfo[0].url}">
+          </div>
+        </div>
+        {/if}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>其他信息-2</strong></legend>
+      <div class="form-group">
+        <label>大标题</label>
+        {if isset($blockinfo[1])}
+        <input type="text" class="form-control" name="title_2" placeholder="title" value="{$blockinfo[1].title}">
+        {else}
+        <input type="text" class="form-control" name="title_2" placeholder="title">
+        {/if}
+      </div>
+      <div class="form-group">
+        <label>小标题</label>
+        {if isset($blockinfo[1])}
+        <input type="text" class="form-control" name="small_title_2" placeholder="small_title" value="{$blockinfo[1].smalltitle}">
+        {else}
+        <input type="text" class="form-control" name="small_title_2" placeholder="small_title">
+        {/if}
+      </div>
+      <div class="form-group">
+        <label>是否为链接</label>
+        {if isset($blockinfo[1]) && $blockinfo[1].link}
+        <input type="checkbox" class="is-link" name="is_link_2" data-id="2" value="true" checked>
+        {else}
+        <input type="checkbox" class="is-link" name="is_link_2" data-id="2" value="true">
+        {/if}
+      </div>
+      <div class="form-group link-box-2"><!-- 动态传入 -->
+      {if isset($blockinfo[1]) && $blockinfo[1].link}
+      <div class="link-body-2">
+        <div class="form-group">
+          <label>链接地址</label>
+          <input type="text" class="form-control" name="link_url_2" placeholder="url" value="{$blockinfo[1].url}">
+        </div>
+      </div>
+      {/if}
+      </div>
+    </fieldset>
+    <button type="button" class="btn btn-warning sub-footer">保存信息</button>
+  </form>
+
+  <script type="text/javascript" src="static/js/mainform.js"></script>
+  <script type="text/javascript" src="static/js/control.js"></script>
+

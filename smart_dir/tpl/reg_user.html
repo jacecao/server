@@ -1,0 +1,33 @@
+<form class="user-login userform">
+  <h3>添加新的管理员</h3><hr>
+  <div class="form-box">
+    <div class="form-group">
+      <label for="user">用户名</label>
+      <input type="text" class="form-control" id="user" name="username" placeholder="输入注册用户名">
+    </div>
+    <div class="form-group">
+      <label for="psw">密码</label>
+      <input type="password" class="form-control" id="psw" name="password" placeholder="密码">
+    </div>
+    <div class="form-group">
+      <label for="psw_r">再一次输入密码</label>
+      <input type="password" class="form-control" id="psw_r" placeholder="再输入一次密码">
+    </div>
+    <div class="form-group captchar-input">
+      <label for="captchar">请输入验证码 <a class="change-captchar" href="javascript:void(0);">换一个</a></label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="captchar" name="captchar" placeholder="输入右侧验证码">
+        <span class="input-group-addon captchar-box">
+          <img class="captchar-img" src="enter/captchar.php" alt="识别码">
+        </span>
+      </div>
+    </div>
+  </div>
+  {if $user['power']==='root'}
+  <button type="button" class="btn btn-primary btn-sub btn-reg">注册管理员</button>
+  {else}
+  <button type="button" class="btn btn-primary" disabled>注册管理员</button>
+  {/if}
+</form>
+
+<script src="static/js/form.js"></script>

@@ -1,0 +1,12 @@
+{if $images}
+  <ul class="choose-box">
+    {foreach $images as $image}
+    <li>
+      <input type="radio" name="chooseimg" value="{$image['url']}" data-id="{$image['id']}" data-desc="{$image['desc']|default:'post'}" data-name="{$image['name']}">
+      <img src="{$image['url']}" alt="{$image['name']}">
+    </li>
+    {/foreach}
+  </ul>
+{else}
+  <p>还没有图片上传哦</p>
+{/if}
