@@ -35,6 +35,8 @@ GetWin('.nav-set', URL.navSet);
 GetWin('.add-news', URL.newsAdd);
 // 获取新闻列表
 GetWin('.list-news', URL.newsList);
+// 获取下线新闻列表
+GetWin('.list-del-news', URL.newsUnlineList);
 
 // 获取春季酒店录入
 GetWin('.add-hotel', URL.hotelAdd);

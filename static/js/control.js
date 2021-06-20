@@ -127,14 +127,14 @@ $('.news-edit').on('click', function () {
 // 置顶操作
 $('.news-set-top').on('click', function () {
   var _id = $(this).data('id');
-  var _url = URL.set_top;
-  set_top(_url, URL.newsList, _id);
+  $(this).attr('disabled', true);
+  set_top(URL.set_top_news, URL.newsList, _id);
 });
 // 取消数据置顶
 $('.news-cancel-top').on('click', function () {
   var _id = $(this).data('id');
-  var _url = URL.edit_news + _id;
-  // redirector(_url);
+  $(this).attr('disabled', true);
+  cancel_top(URL.cancel_top_news, URL.newsList, _id);
 });
 // 删除数据
 $('.news-del').on('click', function () {
@@ -142,6 +142,13 @@ $('.news-del').on('click', function () {
   $(this).attr('disabled', true);
   // 执行修改数据处理
   del_data(URL.del_news, URL.newsList, id);
+});
+// 恢复数据处理
+$('.news-recovery').on('click', function () {
+  var id = $(this).data('id');
+  $(this).attr('disabled', true);
+  // 执行修改数据处理
+  recovery_data(URL.recovery_news, URL.newsUnlineList, id);
 });
 
 /********************************

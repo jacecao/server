@@ -135,10 +135,37 @@ class dataController {
       echo 0;
     }
   }
+   // 取消新闻置顶
+  public function news_cancel_top () {
+    $newsModel = M('news_hotel');
+    $res = $newsModel->cancel_top_news();
+    if ($res) {
+      echo 1;
+    } else {
+      echo 0;
+    }
+  }
+
   // 删除新闻数据
+  // 注意这里不是真实的删除，只是将该条新闻下线，不再显示
+  // 超级管理人员可以恢复上线
   public function news_del () {
     $newsModel = M('news_hotel');
     $res = $newsModel->del_news_hotel('news');
+    if ($res) {
+      // 启动json数据储存
+      $pro = M('product');
+      echo $pro->write_news();
+    } else {
+      echo 0;
+    }
+  }
+  // 删除新闻数据
+  // 注意这里不是真实的删除，只是将该条新闻下线，不再显示
+  // 超级管理人员可以恢复上线
+  public function news_recovery () {
+    $newsModel = M('news_hotel');
+    $res = $newsModel->recovery_news_hotel('news');
     if ($res) {
       // 启动json数据储存
       $pro = M('product');

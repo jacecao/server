@@ -17,15 +17,20 @@
         <td>{$one@iteration}</td>
         <td>{$one.title}</td>
         <td>{$one.username}</td>
-        <td>{$one.date}</td>
+        <td>{$one.createdate}</td>
         <td>
           <button class="btn btn-default news-edit" type="button" data-id="{$one.id}">编辑</button>
+        {if $one.status == 0}
+          <button class="btn btn-warning news-recovery" type="button" data-id="{$one.id}">恢复</button>
+        {else}
           <button class="btn btn-warning news-del" type="button" data-id="{$one.id}">删除</button>
           {if isset($one.topvalue) && $one.topvalue > 0}
           <button class="btn btn-warning news-cancel-top" type="button" data-id="{$one.id}">取消置顶</button>
+          <button class="btn btn-primary news-set-top" type="button" data-id="{$one.id}">置顶向前</button>
           {else}
           <button class="btn btn-info news-set-top" type="button" data-id="{$one.id}">置顶</button>
           {/if}
+        {/if}
         </td>
       </tr>
       {/foreach}

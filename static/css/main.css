@@ -44,6 +44,7 @@ label i.tip-info, div.time_box i.tip-info{
 }
 .win-left {
   width: 20%;
+  margin-right: 16px;
 }
 .win-right {
   width: 70%;

@@ -11,6 +11,9 @@
       )";
       return $sql;
     }
+    /*
+    ** 使用max方法查询某个字段最大值时，为该字段添加普通索引就大大执行效率
+    */
     // 创建新闻表单
     public function create_news () {
       $sql = "CREATE TABLE IF NOT EXISTS news (

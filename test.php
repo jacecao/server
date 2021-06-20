@@ -44,3 +44,14 @@ var_dump($_arr);
 
 $_int_1 = 1;
 echo "$_int_1";
+
+
+class Getdefine {
+  private $site = 1;
+  public function get ($v) {
+    echo $this->$v;
+  }
+}
+
+$GG =  new Getdefine();
+$GG-> get('site');

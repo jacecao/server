@@ -6,7 +6,9 @@ var message = {
   edit_success: '数据提交成功！',
   edit_error: '数据提交失败，请重新填写',
   del_success: '数据删除成功！',
-  del_error: '数据删除失败'
+  del_error: '数据删除失败',
+  recovery_success: '数据恢复成功',
+  recovery_error: '数据恢复失败'
 };
 
 // 获取上传文件名
@@ -136,6 +138,40 @@ var del_data = function (url, re_url, id) {
   });
 };
 
+// 删除数据
+/*******************************  
+* url 数据提交地址 
+* re_url 提交成功后重定向地址
+* id 当前数据id
+**********************************/
+var recovery_data = function (url, re_url, id) {
+  // 加入loading动画
+  var load = new Addloading();
+  load.add();
+  // 提交数据
+  $.ajax({
+    url : url,
+    type : 'POST',
+    data : {'id': id},
+    success : function(res) {
+      load.remove();
+      // console.log(res);
+      if (parseInt(res)) {
+        activeMessge(message.recovery_success, 'ok', '#8bc34a');
+        // 重定向表单 移除加载动画
+        redirector(re_url);
+      } else {
+        activeMessge(message.recovery_error, 'remove', '#e91e63');
+        load.remove();
+      }
+    },
+    error: function (res) {
+      load.remove();
+      activeMessge(res.statusText, 'remove', '#e91e63');
+    }
+  });
+};
+
 // 设置置顶
 /*******************************  
 * url 数据提交地址 
@@ -160,6 +196,40 @@ var set_top = function(url, re_url, id){
         redirector(re_url);
       } else {
         activeMessge("置顶失败", 'remove', '#e91e63');
+        load.remove();
+      }
+    },
+    error: function (res) {
+      load.remove();
+      activeMessge(res.statusText, 'remove', '#e91e63');
+    }
+  });
+};
+
+// 取消置顶
+/*******************************  
+* url 数据提交地址 
+* re_url 提交成功后重定向地址
+* id 当前数据id
+**********************************/
+var cancel_top = function(url, re_url, id){
+  // 加入loading动画
+  var load = new Addloading();
+  load.add();
+  // 提交数据
+  $.ajax({
+    url : url,
+    type : 'POST',
+    data : {'id': id},
+    success : function(res) {
+      load.remove();
+      // console.log(res);
+      if (parseInt(res)) {
+        activeMessge("设置成功", 'ok', '#8bc34a');
+        // 重定向表单 移除加载动画
+        redirector(re_url);
+      } else {
+        activeMessge("设置失败", 'remove', '#e91e63');
         load.remove();
       }
     },

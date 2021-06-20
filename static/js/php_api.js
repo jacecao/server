@@ -53,19 +53,24 @@ var URL = {
   // 秋季会展数据保存
   sub_qiu_huizhan: PATH + '/enter/main.php?controller=data&method=qiu_huizhan_sub',
 
-
   // 获取新闻录制界面
   newsAdd: PATH + '/enter/main.php?controller=admin&method=view&view=news',
   // 新闻列表界面
   newsList: PATH + '/enter/main.php?controller=admin&method=list_win&list=news',
+  // 下线新闻列表界面
+  newsUnlineList: PATH + '/enter/main.php?controller=admin&method=list_win&list=news_unline',
   // 新闻图片上传
   upNews: PATH + '/enter/main.php?controller=data&method=newsup',
   // 新闻数据上传
   sub_news: PATH + '/enter/main.php?controller=data&method=news_sub',
   // 置顶新闻
-  set_top: PATH + '/enter/main.php?controller=data&method=news_set_top',
+  set_top_news: PATH + '/enter/main.php?controller=data&method=news_set_top',
+  // 置顶新闻
+  cancel_top_news: PATH + '/enter/main.php?controller=data&method=news_cancel_top',
   // 删除数据
   del_news: PATH + '/enter/main.php?controller=data&method=news_del',
+  // 新闻数据恢复
+  recovery_news: PATH + '/enter/main.php?controller=data&method=news_recovery',
   // 新闻数据修改
   edit_news: PATH + '/enter/main.php?controller=admin&method=view&view=news&id=',
   // 修改后的新闻数据上传
@@ -75,7 +80,6 @@ var URL = {
   hotelAdd: PATH + '/enter/main.php?controller=admin&method=view&view=hotel',
   // 酒店列表界面
   hotelList: PATH + '/enter/main.php?controller=admin&method=list_win&list=hotel',
-
   // 酒店数据上传
   sub_hotel: PATH + '/enter/main.php?controller=data&method=hotel_sub',
   // 删除数据

@@ -106,18 +106,7 @@
       }
 
     }
-    // 新闻置顶
-    public function set_top_news () {
-      if (!empty($this->_user)) {
-        $id = Daddslashes($_POST['id']);
-        $sql = 'SELECT `topvalue` FROM '.$this->news_table.' WHERE `id` = "'.$id.'"';
-        // 获取topvalue字段值
-        $_top_value = (int)(DB::findOne($sql)['topvalue']);
-        $_top_value ++;
-        return DB::update($this->news_table, array('topvalue' => $_top_value), '`id`="'.$id.'"');
-      }
-    }
-
+    
     /********************************
     **       修改酒店数据         **
     ********************************/
@@ -141,58 +130,159 @@
     /********************************
     **       数据的上下线处理       **
     ********************************/
+    // 数据下线处理
     // $table 数据表名字
     public function del_news_hotel ($table) {
+      $_update_data = array('status'=> 0, 'topvalue' => 0);
       if (!empty($this->_user)) {
         $id = Daddslashes($_POST['id']);
         if ($table == 'news') {
-          return DB::del($this->news_table, '`id`="'.$id.'"');
+          return DB::update($this->news_table, $_update_data, '`id`="'.$id.'"');
         }
         if ($table == 'hotel') {
-          return DB::del($this->hotel_table, '`id`="'.$id.'"');
+          return DB::update($this->hotel_table, $_update_data, '`id`="'.$id.'"');
         }
         if ($table == 'autumn_hotel') {
-          return DB::del($this->autumn_hotel_table, '`id`="'.$id.'"');
+          return DB::update($this->autumn_hotel_table, $_update_data, '`id`="'.$id.'"');
+        }
+      }
+    }
+    // 数据上线处理
+    // $table 数据表名字
+    public function recovery_news_hotel ($table) {
+      $_update_data = array('status'=> 1);
+      if (!empty($this->_user)) {
+        $id = Daddslashes($_POST['id']);
+        if ($table == 'news') {
+          return DB::update($this->news_table, $_update_data, '`id`="'.$id.'"');
+        }
+        if ($table == 'hotel') {
+          return DB::update($this->hotel_table, $_update_data, '`id`="'.$id.'"');
+        }
+        if ($table == 'autumn_hotel') {
+          return DB::update($this->autumn_hotel_table, $_update_data, '`id`="'.$id.'"');
         }
       }
     }
 
     /********************************
-    **       获取新闻数据         **
+    ** 数据置顶操作
     ********************************/
-    // 获取所有的新闻数据
-    public function get_all_news () {
-      $sql = 'SELECT * FROM '.$this->news_table.' ORDER BY `createdate` DESC';
+    // 通用方法
+    // 设置置顶
+    private function set_top ($table_name) {
+      if (!empty($this->_user)) {
+        $id = Daddslashes($_POST['id']);
+        // 获取当前置顶值最大数
+        $sql_max_topvalue = 'SELECT MAX(`topvalue`) FROM '.$this->$table_name." WHERE `status` = 1";
+        $_max_top_value = (int)(DB::findOne($sql_max_topvalue));
+        // 修改当前数据的topvalue值
+        $sql = 'SELECT `topvalue` FROM '.$this->$table_name.' WHERE `id` = "'.$id.'"';
+        // 获取topvalue字段值
+        try {
+          $_top_value = (int)(DB::findOne($sql)['topvalue']);
+          $_top_value ++;
+          echo $_top_value . ' max: '.$_max_top_value.'\n';
+          echo $_top_value > ($_max_top_value + 1);
+          if ($_top_value > ($_max_top_value + 1) ) { // 如果当前置顶的值已经是最大的值，那么不做任何操作直接返回
+            return 1;
+          } else {
+            echo 'set top';
+            return DB::update($this->$table_name, array('topvalue' => $_top_value), '`id`="'.$id.'"');
+          }
+        } catch (Exception $e) {
+          return 0;
+        }
+        
+      }
+    }
+    // 取消置顶
+    private function cancel_top ($table_name) {
+      if (!empty($this->_user)) {
+        $id = Daddslashes($_POST['id']);
+        return DB::update($this->$table_name, array('topvalue' => 0), '`id`="'.$id.'"');
+      }
+    }
+    /******
+    ** 新闻置顶操作
+    *******/
+    // 新闻置顶
+    public function set_top_news () {
+      return $this->set_top('news_table');
+    }
+    // 新闻取消置顶
+    public function cancel_top_news () {
+      return $this->cancel_top('news_table');
+    }
+
+
+    /********************************
+    **       获取新闻_酒店数据         **
+    ********************************/
+    // 通用方法获取所有数据
+    private function get_all_data ($table_name) {
+      $sql = 'SELECT * FROM '.$this->$table_name.' ORDER BY `createdate` DESC';
       $data = DB::findAll($sql);
       return empty($data) ? '' : $data;
+    }
+    // 通用获取所有在线的数据
+    private function get_all_online_data ($table_name) {
+      $sql = 'SELECT * FROM '.$this->$table_name.' WHERE `status` = 1 ORDER BY `createdate` DESC';
+      $data = DB::findAll($sql);
+      return empty($data) ? '' : $data;
+    }
+    // 通用获取所有下线的数据
+    private function get_all_unline_data ($table_name) {
+      $sql = 'SELECT * FROM '.$this->$table_name.' WHERE `status` = 0 ORDER BY `createdate` DESC';
+      $data = DB::findAll($sql);
+      return empty($data) ? '' : $data;
+    }
+    /********************
+    **  新闻数据集处理 ***
+    *********************/
+    // 获取所有的新闻数据
+    public function get_all_news () {
+      return $this->get_all_data('news_table');
     }
     // 获取所有的在线新闻数据
     public function get_online_news () {
-      $sql = 'SELECT * FROM '.$this->news_table.' WHERE `status` = 1 ORDER BY `createdate` DESC';
-      $data = DB::findAll($sql);
-      return empty($data) ? '' : $data;
+      return $this->get_all_online_data('news_table');
     }
     // 获取所有的下线的新闻数据
-    public function get_del_news () {
-      $sql = 'SELECT * FROM '.$this->news_table.' WHERE `status` = 0 ORDER BY `createdate` DESC';
-      $data = DB::findAll($sql);
-      return empty($data) ? '' : $data;
+    public function get_unline_news () {
+      return $this->get_all_unline_data('news_table');
     }
 
     /********************************
-    **       获取酒店数据         **
+    **       获取春季酒店数据         **
     ********************************/
     // 获取所有的酒店数据
     public function get_all_hotel () {
-      $sql = 'SELECT * FROM '.$this->hotel_table.' ORDER BY `date` DESC';
-      $data = DB::findAll($sql);
-      return empty($data) ? '' : $data;
+      return $this->get_all_data('hotel_table');
     }
-    // 获取所有的酒店数据
+    // 获取所有在线的酒店数据
+    public function get_online_hotel (){
+      return $this->get_all_online_data('hotel_table');
+    }
+    // 获取所有下线的酒店数据
+    public function get_unline_hotel (){
+      return $this->get_all_unline_data('hotel_table');
+    }
+
+    /********************************
+    **       获取春季酒店数据         **
+    ********************************/
+    // 获取所有的秋季酒店数据
     public function get_all_autumn_hotel () {
-      $sql = 'SELECT * FROM '.$this->autumn_hotel_table.' ORDER BY `date` DESC';
-      $data = DB::findAll($sql);
-      return empty($data) ? '' : $data;
+      return $this->get_all_data('autumn_hotel_table');
+    }
+    // 获取所有在线秋季酒店数据
+    public function get_online_autumn_hotel (){
+      return $this->get_all_online_data('autumn_hotel_table');
+    }
+    // 获取所有下线的酒店数据
+    public function get_unline_autumn_hotel (){
+      return $this->get_all_unline_data('autumn_hotel_table');
     }
 
     /********************************
@@ -262,7 +352,7 @@
     // 转换指定的新闻模块信息 为json储存做好准备
     public function get_image_news ($max=6) {
       // 获取所有的新闻数据
-      $allNews = $this->get_all_news();
+      $allNews = $this->get_online_news();
       // 如果数据超过指定个数
       // 那么需要截取掉
       if (count($allNews) > $max) {

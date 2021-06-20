@@ -299,7 +299,13 @@
             break;
           case 'news':
             $newsModel = M('news_hotel');
-            $_news_value = $newsModel->get_all_news();
+            $_news_value = $newsModel->get_online_news();
+            empty($_news_value) ? '' : ($_data['news'] = $_news_value);
+            break;
+          case 'news_unline':
+            $newsModel = M('news_hotel');
+            $_news_value = $newsModel->get_unline_news();
+            $listname = 'news';
             empty($_news_value) ? '' : ($_data['news'] = $_news_value);
             break;
           case 'hotel':
