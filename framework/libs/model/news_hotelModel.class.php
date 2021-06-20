@@ -175,19 +175,23 @@
         $id = Daddslashes($_POST['id']);
         // 获取当前置顶值最大数
         $sql_max_topvalue = 'SELECT MAX(`topvalue`) FROM '.$this->$table_name." WHERE `status` = 1";
-        $_max_top_value = (int)(DB::findOne($sql_max_topvalue));
+        // 将返回的数组(键值对的关联数组)转换位值得索引数组
+        $_max_value_arr = array_values(DB::findOne($sql_max_topvalue));
+        // 取第一个索引对应值(也就是最大值)
+        $_max_top_value = (int)($_max_value_arr[0]);
+
+        // 查询当前top值设定为最大值的数据有几条
+        $sql = 'SELECT `topvalue` FROM '.$this->$table_name.' WHERE `topvalue` = '.$_max_top_value;
+        $data_count = count(DB::findAll($sql));
         // 修改当前数据的topvalue值
         $sql = 'SELECT `topvalue` FROM '.$this->$table_name.' WHERE `id` = "'.$id.'"';
         // 获取topvalue字段值
         try {
           $_top_value = (int)(DB::findOne($sql)['topvalue']);
-          $_top_value ++;
-          echo $_top_value . ' max: '.$_max_top_value.'\n';
-          echo $_top_value > ($_max_top_value + 1);
-          if ($_top_value > ($_max_top_value + 1) ) { // 如果当前置顶的值已经是最大的值，那么不做任何操作直接返回
+          if ($data_count == 1 && $_max_top_value == $_top_value) { // 如果当前置顶的值已经是最大的值，那么不做任何操作直接返回
             return 1;
           } else {
-            echo 'set top';
+            $_top_value ++;
             return DB::update($this->$table_name, array('topvalue' => $_top_value), '`id`="'.$id.'"');
           }
         } catch (Exception $e) {
@@ -199,8 +203,25 @@
     // 取消置顶
     private function cancel_top ($table_name) {
       if (!empty($this->_user)) {
-        $id = Daddslashes($_POST['id']);
-        return DB::update($this->$table_name, array('topvalue' => 0), '`id`="'.$id.'"');
+        try {
+          // 取消当前数据的置顶
+          $id = Daddslashes($_POST['id']);
+          DB::update($this->$table_name, array('topvalue' => 0), '`id`="'.$id.'"');
+          // 当目前置顶的数据为1条时，需要将该条的topvalue值强行设定为1
+          // 查询当前设定top值的数据有几条
+          $sql = 'SELECT `id`, `topvalue` FROM '.$this->$table_name.' WHERE `topvalue` <> 0';
+          $_result = DB::findAll($sql);
+          $data_count = count($_result);
+          if ($data_count == 1 && isset($_result[0])) {
+            // 获取唯一置顶数据的ID值
+            $id = $_result[0]['id'];
+            DB::update($this->$table_name, array('topvalue' => 1), '`id`="'.$id.'"');
+          }
+          return 1;
+        } catch (Exception $e) {
+          return 0;
+        }
+        
       }
     }
     /******
@@ -227,7 +248,7 @@
     }
     // 通用获取所有在线的数据
     private function get_all_online_data ($table_name) {
-      $sql = 'SELECT * FROM '.$this->$table_name.' WHERE `status` = 1 ORDER BY `createdate` DESC';
+      $sql = 'SELECT * FROM '.$this->$table_name.' WHERE `status` = 1 ORDER BY `topvalue` DESC,`createdate` DESC';
       $data = DB::findAll($sql);
       return empty($data) ? '' : $data;
     }
