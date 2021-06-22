@@ -379,5 +379,18 @@ class dataController {
     }
   }
 
+  /********************************
+  **       图片数据处理        **
+  ********************************/
+  public function imgCategory() {
+    $imgMod = M('image');
+    $res = $imgMod->get_images_category();
+    if ($res) {
+      var_dump($res);
+    } else {
+      echo 0;
+    }
+  }
+
 }
 ?>

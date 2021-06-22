@@ -151,4 +151,6 @@ var URL = {
 
   // 获取图片
   getImg: PATH + '/enter/main.php?controller=admin&method=imglist',
+  // 获取图片总类别
+  getImgCat: PATH + '/enter/main.php?controller=data&method=imgCategory'
 };

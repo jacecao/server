@@ -107,9 +107,9 @@ function loading (info) {
   var load = $('<div class="loading-body"></div>');
   var circle1 = $('<div class="circle-1"></div>');
   var circle2 = $('<div class="circle-2"></div>');
-  var info = $('<div class="loading-info">'+_info+'</div>');
+  var info_text = $('<div class="loading-info">'+_info+'</div>');
   load.append(circle1).append(circle2);
-  body.append(load).append(info);
+  body.append(load).append(info_text);
   body.hide();
   body.fadeIn('slow');
   return body;

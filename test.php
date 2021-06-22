@@ -55,3 +55,26 @@ class Getdefine {
 
 $GG =  new Getdefine();
 $GG-> get('site');
+echo'<hr/>';
+// 自定义数组排序，键名排序
+$_test_arr = array(
+  "chun_huizhan" => '1',
+  "header" => '3',
+  "hotel" => '4',
+  "news" => '5',
+  "qiu_huizhan" => '2',
+);
+var_dump($_test_arr);
+echo'<hr/>';
+function compare_key($a, $b) {
+  if (strlen($a) > strlen($b)) {
+    return 1;
+  } else if (strlen($a) < strlen($b)) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+uksort($_test_arr, $this-);
+
+var_dump($_test_arr);

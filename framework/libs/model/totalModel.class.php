@@ -26,6 +26,11 @@
       $imageOBJ = M('image');
       return $imageOBJ->total_images();
     }
+    //获取图片总分类（有哪些类）
+    private function images_category () {
+      $imageOBJ = M('image');
+      return $imageOBJ->get_images_category();
+    }
 
     // 总数数据模型
     public function total() {
@@ -35,6 +40,7 @@
         'admin' => $this->total_users(),
         'job' => $this->total_jobs(),
         'image' => $this->total_images(),
+        'imgCategory' => $this->images_category()
         );
     }
 

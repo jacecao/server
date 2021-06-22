@@ -68,6 +68,14 @@ GetWin('.job-contact', URL.jobContact);
 // 底部信息设置
 GetWin('.bottom-set', URL.footerSet);
 
+/********************************
+**   图片操作控制          **
+********************************/
+$('#images_ctl').on('click', function (e) {
+  // GetWin('.img_test', URL.getImgCat);
+  // 提交修改的数据
+});
+
 // 创建富文本对象
 /******************************************** 
 $ueNodeID UE挂载元素，直接输入ID名称，不需要加“#”

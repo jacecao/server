@@ -64,5 +64,54 @@
       return DB::num_rows($sql);
     }
 
+    // 自定义数组排序函数
+    private function compare_key ($a, $b) {
+      if (strlen($a) > strlen($b)) {
+        return 1;
+      } else if (strlen($a) < strlen($b)) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+    // 获取当前图片类别
+    public function get_images_category() {
+      // 查询当前图片的所有类
+      $sql = 'SELECT `dir` FROM '.$this->_table.' GROUP BY `dir`';
+      $res = DB::findAll($sql);
+      // 将得到的数据重组为只包含类名称的数组
+      $res_arr = array();
+      if ($res && is_array($res) && count($res) > 0) {
+        foreach ($res as $key => $value) { // 遍历索引数组
+          foreach ($value as $_key => $_value) { // 这一层得到键值对数组"dir"=>"value"
+            switch ($_value) {
+              case 'header':
+                $res_arr[$_value] = '网页顶部图片';
+                break;
+              case 'hotel':
+                $res_arr[$_value] = '酒店图片';
+                break;
+              case 'news':
+                $res_arr[$_value] = '新闻图片';
+                break;
+              case 'chun_huizhan':
+                $res_arr[$_value] = '春季会展中心图片';
+                break;
+              case 'qiu_huizhan':
+                $res_arr[$_value] = '秋季会展中心图片';
+                break;
+            }
+          }
+        }
+      }
+      // 对分类数组进行自定义排序，按类的字符串长度排序
+      // 这里需要将类中函数作为参数变量传入时，需用通过数组传参的方式来
+      // 否则就会出现错误 uksort($res_arr, 'compare_key'),这样就会出现问题
+      uksort($res_arr, array($this, 'compare_key'));
+      return $res_arr;
+    }
+
+
+
   }
 ?>

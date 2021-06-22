@@ -376,3 +376,7 @@ $('.sub-job-contact').on('click', function () {
   // 提交修改的数据
   up_form_data(URL.sub_job_contact, URL.jobContact, '.job-contact-form');
 });
+
+/********************************
+**   图片操作控制          **
+********************************/

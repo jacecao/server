@@ -59,11 +59,12 @@
       <!-- 导航条管理 -->
       <button type="button" class="left-menu nav-set btn btn-primary">导航条设置</button>
       <!-- 图片管理 -->
-      <button class="left-menu btn btn-primary" type="button" data-toggle="collapse" data-target="#images_ctl" aria-expanded="false" aria-controls="images_list">图片管理<span class="glyphicon glyphicon-chevron-down icon-down"></span></button>
+      <button class="left-menu btn btn-primary" type="button" data-toggle="collapse" data-target="#images_ctl" aria-expanded="false" aria-controls="images_ctl">图片管理<span class="glyphicon glyphicon-chevron-down icon-down"></span></button>
       <div class="collapse" id="images_ctl">
         <div class="btn-group-vertical vertical-menu" role="group" aria-label="...">
-          <a class="btn btn-default add-job" href="javascript:;">那类别显示</a>
-          <a class="btn btn-default list-job" href="javascript:;">招聘管理</a>
+          {foreach from=$imgCategory item=category key=name}
+          <a class="btn btn-default" data-cat={$name} href="javascript:;">{$category}</a>
+          {/foreach}
         </div>
       </div>
       <!-- 管理后台人员 -->
