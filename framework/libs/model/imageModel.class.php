@@ -37,7 +37,7 @@
 
     // 获取指定图片
     public function find_by_dir ($dir) {
-      $sql = 'SELECT * FROM '.$this->_table.' WHERE `dir`='."'$dir'".' ORDER BY `date` DESC';
+      $sql = 'SELECT * FROM '.$this->_table.' WHERE `dir`="'.$dir.'" ORDER BY `date` DESC';
       return DB::findAll($sql);
     }
 
@@ -111,6 +111,20 @@
       return $res_arr;
     }
 
+    // 按类获取图片列表
+    public function getImgsByDir() {
+      if ( isset($_GET['dir']) ) {
+        $_dir = Daddslashes($_GET['dir']);
+        $_img_arr = $this->find_by_dir($_dir);
+        if ($_img_arr) {
+          return $_img_arr;
+        } else {
+          echo 0;
+        }
+      } else {
+        echo 0;
+      }
+    }
 
 
   }

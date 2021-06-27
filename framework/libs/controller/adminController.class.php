@@ -330,10 +330,22 @@
     public function imglist () {
       if (!empty($this->user)) {
         $imgObj = M('image');
-        $dir = $_GET['dir'];
-        $res = $imgObj->find_by_dir($dir);
-        VIEW::assign(array('images'=>$res));
-        VIEW::display('img_list.html');
+        /* **************图片列表类型 *********
+        ** 前端选择图片列表和图片编辑列表使用统一模板
+        ** 这里根据类型来设定，列表输出样式和对应的功能按钮
+        ** 0 || false -> 选择图片列表
+        ** 1 || true -> 图片编辑列表
+        ***************************************/
+        $_img_list_type = isset($_GET['type']) && (int)$_GET['type'];
+        $_category_text = isset($_GET['text']) ? $_GET['text'] : false;
+        $res = $imgObj->getImgsByDir();
+        $_data = array(
+          'images'=>$res, 
+          'type'=>$_img_list_type,
+          'categoryText'=>$_category_text
+        );
+        VIEW::assign($_data);
+        VIEW::display('img_list.html');      
       } else {
         $this->login();
       }

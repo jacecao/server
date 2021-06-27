@@ -63,7 +63,7 @@
       <div class="collapse" id="images_ctl">
         <div class="btn-group-vertical vertical-menu" role="group" aria-label="...">
           {foreach from=$imgCategory item=category key=name}
-          <a class="btn btn-default" data-cat={$name} href="javascript:;">{$category}</a>
+          <a class="btn btn-default" data-cat={$name} data-name={$category} href="javascript:;">{$category}</a>
           {/foreach}
         </div>
       </div>
@@ -97,3 +97,4 @@
     </div>
 </div>
 <script src="./static/js/base.js"></script>
+<script src="./static/js/mainform.js"></script>

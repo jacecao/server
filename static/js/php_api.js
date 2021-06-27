@@ -152,5 +152,7 @@ var URL = {
   // 获取图片
   getImg: PATH + '/enter/main.php?controller=admin&method=imglist',
   // 获取图片总类别
-  getImgCat: PATH + '/enter/main.php?controller=data&method=imgCategory'
+  getImgCat: PATH + '/enter/main.php?controller=data&method=imgCategory',
+  // 按类别获取图片
+  getImgsByCat: PATH + '/enter/main.php?controller=admin&method=imglist&type=1&dir=',
 };

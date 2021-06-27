@@ -382,6 +382,7 @@ class dataController {
   /********************************
   **       图片数据处理        **
   ********************************/
+  // 获取当前图片的分类
   public function imgCategory() {
     $imgMod = M('image');
     $res = $imgMod->get_images_category();
@@ -391,6 +392,7 @@ class dataController {
       echo 0;
     }
   }
+
 
 }
 ?>

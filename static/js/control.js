@@ -380,3 +380,19 @@ $('.sub-job-contact').on('click', function () {
 /********************************
 **   图片操作控制          **
 ********************************/
+$('.img-scan-box').on('click', function (e) {
+  // 当删除按钮点击时
+  if ( $(e.target).hasClass('delete') || $(e.target).hasClass('del-scan') ) {
+    // 获取当前被删除图片的主要信息
+    var _img_node = $(e.currentTarget).find('.scan-img')[0];
+    var _img_src = _img_node.src;
+    var _img_title = _img_node.title;
+    var _img_id = _img_node.dataset.id;
+    // 初始化模态框
+    $('#img-edit-ctl').on('show.bs.modal', function(e){
+      var _html_str = '<img class="modal-img" style="width: 200px; margin:auto;" src="' + _img_src + '" title="' + _img_title + '">';
+      $('.modal-body').html(_html_str);
+    });
+    $('#img-edit-ctl').modal('show');
+  }
+});

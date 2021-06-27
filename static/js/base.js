@@ -69,11 +69,16 @@ GetWin('.job-contact', URL.jobContact);
 GetWin('.bottom-set', URL.footerSet);
 
 /********************************
-**   图片操作控制          **
+**   按类获取图片列表          **
 ********************************/
 $('#images_ctl').on('click', function (e) {
-  // GetWin('.img_test', URL.getImgCat);
-  // 提交修改的数据
+  // 获取当前需要向后台提交的图片类名
+  var _cat = $(e.target).data('cat');
+  // 获取当前按钮对应的中文类名
+  var _name = $(e.target).data('name');
+  // 重组请求路径信息
+  var _uri = URL.getImgsByCat + _cat + '&text=' + _name;
+  redirector(_uri);
 });
 
 // 创建富文本对象
