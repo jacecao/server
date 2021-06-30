@@ -37,7 +37,7 @@
 
     // 获取指定图片
     public function find_by_dir ($dir) {
-      $sql = 'SELECT * FROM '.$this->_table.' WHERE `dir`="'.$dir.'" ORDER BY `date` DESC';
+      $sql = 'SELECT * FROM '.$this->_table.' WHERE `dir`="'.$dir.'" AND `status` = 1 ORDER BY `date` DESC';
       return DB::findAll($sql);
     }
 
@@ -58,9 +58,29 @@
       return DB::update($this->_table, $_arr, 'id='.$id);
     }
 
+    // 删除图片，修改图片状态
+    /*
+    ** $id 图片id
+    ** $url 图片相对地址
+    */
+    public function delete_img ($id, $url) {
+      // 删除图片
+      $res = FILE::deleteImg($url);
+      if ($res) {
+        $_arr = array(
+        'status' => 0,
+        'used' => 0
+        );
+        return DB::update($this->_table, $_arr, 'id='.$id);
+      } else {
+        return false;
+      }
+      
+    }
+
     // 获取图片总数
     public function total_images () {
-      $sql = 'SELECT * FROM '.$this->_table;
+      $sql = 'SELECT * FROM `'.$this->_table. '` WHERE `status` = 1';
       return DB::num_rows($sql);
     }
 

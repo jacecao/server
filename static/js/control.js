@@ -380,6 +380,9 @@ $('.sub-job-contact').on('click', function () {
 /********************************
 **   图片操作控制          **
 ********************************/
+// 图片删除操作
+var del_img_info = new Object();
+
 $('.img-scan-box').on('click', function (e) {
   // 当删除按钮点击时
   if ( $(e.target).hasClass('delete') || $(e.target).hasClass('del-scan') ) {
@@ -388,11 +391,27 @@ $('.img-scan-box').on('click', function (e) {
     var _img_src = _img_node.src;
     var _img_title = _img_node.title;
     var _img_id = _img_node.dataset.id;
+    var _img_url = _img_node.dataset.url;
     // 初始化模态框
-    $('#img-edit-ctl').on('show.bs.modal', function(e){
+    $('#img-edit-ctl').on('show.bs.modal', function(e) {
       var _html_str = '<img class="modal-img" style="width: 200px; margin:auto;" src="' + _img_src + '" title="' + _img_title + '">';
       $('.modal-body').html(_html_str);
     });
+    // 模态框显示后，将当前图片信息输出
+    $('#img-edit-ctl').on('shown.bs.modal', function(e) {
+      del_img_info['url'] = _img_url;
+      del_img_info['id'] = _img_id;
+    });
     $('#img-edit-ctl').modal('show');
+    // 添加模态框隐藏后触发事件
+    $('#img-edit-ctl').on('hidden.bs.modal', function(e) {
+      // 执行图片删除任务
+      del_img_file(URL.deleteImg, window.redirectorImgUri, del_img_info);
+    });
   }
+});
+// 执行删除操作
+$('.delete-img').on('click', function(e) {
+  // 隐藏模态框
+  $('#img-edit-ctl').modal('hide');
 });

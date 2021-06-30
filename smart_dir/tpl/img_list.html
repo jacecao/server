@@ -5,7 +5,7 @@
     {foreach $images as $image}
       <div class="col-xd-6 col-md-3 img-scan-box">
         <div class="thumbnail">
-          <img class="scan-img" src="{$image['url']}" alt="{$image['url']}" title="{$image['desc']}" data-id="{$image['id']}">
+          <img class="scan-img" src="{$image['url']}" alt="{$image['url']}" title="{$image['desc']}" data-id="{$image['id']}" data-url="{$image['url']}">
           <button type="button" class="btn btn-warning del-scan"><span class="glyphicon glyphicon-trash delete"></span></button>
         </div>
       </div>
@@ -17,12 +17,10 @@
 		  	<div class="modal-header">
 		  	  <h4>确定删除这张图片:</h4>	
 		  	</div>	
-		    <div class="modal-body" style="text-align: center;">
-				.......
-		    </div>	
+		    <div class="modal-body" style="text-align: center;"></div>	
 		    <div class="modal-footer">	
 		      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	          <button type="button" class="btn btn-warning">确定</button>
+	          <button type="bsutton" class="btn btn-warning delete-img">确定</button>
 		    </div>
 	  	</div>
 	  </div>

@@ -392,6 +392,18 @@ class dataController {
       echo 0;
     }
   }
+  // 删除图片处理
+  public function imgDelete() {
+    $id = Daddslashes($_POST['id']);
+    $url = Daddslashes($_POST['url']);
+    $imgMod = M('image');
+    $res = $imgMod->delete_img($id, $url);
+    if ($res) {
+      echo 1;
+    } else {
+      echo 0;
+    }
+  }
 
 
 }

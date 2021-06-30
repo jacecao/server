@@ -102,8 +102,11 @@
     }
 
     // 删除文件
+    // $filename 相对网页目录的相对路径
     public function delfile ($filename) {
       $name = basename($filename);
+      // 重构实际图片储存地址
+      $filename = self::$path.$filename;
       $status = false;
       // 如果是文件就直接删除
       if (is_file($filename)) {

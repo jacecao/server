@@ -78,6 +78,9 @@ $('#images_ctl').on('click', function (e) {
   var _name = $(e.target).data('name');
   // 重组请求路径信息
   var _uri = URL.getImgsByCat + _cat + '&text=' + _name;
+  // 这里需要将_uri存入全局变量，用于执行删除或编辑后返回当前页面的参数
+  window.redirectorImgUri = _uri;
+  // 获取页面
   redirector(_uri);
 });
 

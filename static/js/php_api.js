@@ -155,4 +155,6 @@ var URL = {
   getImgCat: PATH + '/enter/main.php?controller=data&method=imgCategory',
   // 按类别获取图片
   getImgsByCat: PATH + '/enter/main.php?controller=admin&method=imglist&type=1&dir=',
+  // 删除图片
+  deleteImg: PATH + '/enter/main.php?controller=data&method=imgDelete',
 };

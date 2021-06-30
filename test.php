@@ -75,6 +75,6 @@ function compare_key($a, $b) {
     return 0;
   }
 }
-uksort($_test_arr, $this-);
+uksort($_test_arr, 'compare_key');
 
 var_dump($_test_arr);

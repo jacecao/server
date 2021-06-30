@@ -239,3 +239,38 @@ var cancel_top = function(url, re_url, id){
     }
   });
 };
+
+
+// 删除图片数据
+/*******************************  
+* url 数据提交地址 
+* re_url 提交成功后重定向地址
+* imginfo 图片对象信息
+**********************************/
+var del_img_file = function (url, re_url, imginfo) {
+  // 加入loading动画
+  var load = new Addloading();
+  load.add();
+  // 提交数据
+  $.ajax({
+    url : url,
+    type : 'POST',
+    data : imginfo,
+    success : function(res) {
+      load.remove();
+      // console.log(res);
+      if (parseInt(res)) {
+        activeMessge(message.del_success, 'ok', '#8bc34a');
+        // 重定向表单 移除加载动画
+        redirector(re_url);
+      } else {
+        activeMessge(message.del_error, 'remove', '#e91e63');
+        load.remove();
+      }
+    },
+    error: function (res) {
+      load.remove();
+      activeMessge(res.statusText, 'remove', '#e91e63');
+    }
+  });
+};

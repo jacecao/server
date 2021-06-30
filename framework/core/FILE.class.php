@@ -51,7 +51,7 @@
     }
 
     //删除图片
-    public static function del ($filepath) {
+    public static function deleteImg ($filepath) {
       $res = self::$fileclass->delFile($filepath);
       return $res;
     }
