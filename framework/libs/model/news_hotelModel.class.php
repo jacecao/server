@@ -445,7 +445,7 @@
 
     // 获取新闻信息总数
     public function total_news () {
-      $sql = 'SELECT * FROM '.$this->news_table;
+      $sql = 'SELECT * FROM '.$this->news_table.' WHERE `status` = 1';
       return DB::num_rows($sql);
     }
 
