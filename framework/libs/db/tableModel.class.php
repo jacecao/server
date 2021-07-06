@@ -13,6 +13,7 @@
     }
     /*
     ** 使用max方法查询某个字段最大值时，为该字段添加普通索引就大大执行效率
+    ** ALTER TABLE `TABLE_NAME` ADD INDEX `TOPVAULE`(`topvalue`) using BTREE
     */
     // 创建新闻表单
     public function create_news () {
@@ -24,7 +25,7 @@
         `images` TINYTEXT NOT NULL,
         `content` TEXT NOT NULL,
         `username` TINYTEXT NOT NULL,
-        `createdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `createdate` DATETIME DEFAULT NULL,
         `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         `status` TINYINT(4) NOT NULL DEFAULT 1,
         `topvalue` SMALLINT(4) UNSIGNED NOT NULL DEFAULT 0
@@ -41,9 +42,10 @@
         `images` TINYTEXT NOT NULL,
         `content` TEXT NOT NULL,
         `username` TINYTEXT NOT NULL,
-        `createdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `createdate` DATETIME DEFAULT NULL,
         `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        `status` TINYINT(4) NOT NULL DEFAULT 1
+        `status` TINYINT(4) NOT NULL DEFAULT 1,
+        `topvalue` SMALLINT(4) UNSIGNED NOT NULL DEFAULT 0
       )";
       return $sql;
     }
@@ -57,9 +59,10 @@
         `images` TINYTEXT NOT NULL,
         `content` TEXT NOT NULL,
         `username` TINYTEXT NOT NULL,
-        `createdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `createdate` DATETIME DEFAULT NULL,
         `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        `status` TINYINT(4) NOT NULL DEFAULT 1
+        `status` TINYINT(4) NOT NULL DEFAULT 1,
+        `topvalue` SMALLINT(4) UNSIGNED NOT NULL DEFAULT 0
       )";
       return $sql;
     }

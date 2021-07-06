@@ -266,7 +266,21 @@ $('.btn-reg').on('click', function () {
   });
 });
 
-
+// 获取的操作主页面
+var form_get_win = function () {
+  add_user_info ( function () {
+    // 获取操作界面
+    $.get(URL.win, function (res) {
+      $('#app-body').html(res);
+    });
+  });
+};
+// 返回登录页面操作
+var form_back_to_reg = function () {
+  $.get(URL.enter, function (res) {
+    $('#app-body').html(res);
+  });
+};
 // 用户登录提交
 $('.btn-log').on('click', function () {
 
@@ -285,18 +299,11 @@ $('.btn-log').on('click', function () {
         activeMessge(info.success, 'ok', '#8bc34a');
         $('#app-body').html(loading('正在获取主页面'));
         // 获取用户信息
-        add_user_info ( function () {
-          // 获取操作界面
-          $.get(URL.win, function (res) {
-            $('#app-body').html(res);
-          });
-        });
+        setTimeout('form_get_win()', 1500);
       } else {
         activeMessge(info.error, 'remove', '#f00');
         $('#app-body').html(loading('登录出错，返回登录页'));
-        $.get(URL.enter, function (res) {
-          $('#app-body').html(res);
-        });
+        setTimeout('form_back_to_reg()', 1500);
       }
     },
     error: function (res) {

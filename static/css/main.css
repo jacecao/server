@@ -28,7 +28,7 @@ label i.tip-info, div.time_box i.tip-info{
   align-items: flex-start;
   width: 90%;
   min-width: 921px;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 
 #exit {
@@ -47,7 +47,7 @@ label i.tip-info, div.time_box i.tip-info{
   margin-right: 16px;
 }
 .win-right {
-  width: 70%;
+  width: 80%;
 }
 
 
@@ -109,6 +109,7 @@ label i.tip-info, div.time_box i.tip-info{
   position: relative;
   margin:0 0 20px 20px;
   padding: 10px;
+  min-width: 680px;
   min-height: 600px;
 }
 
@@ -184,11 +185,14 @@ input.color-radio {
 .form-reset {
   padding-right: 50px;
 }
-.form-reset, .data-list {
-  /* height: 500px; */
-  max-height: 500px;
+.form-reset, .data-list, .edit-img-list {
+  height: 800px; 
+  max-height: 800px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.edit-img-list {
+  padding: 16px;
 }
 
 /* 添加新闻 */
@@ -245,6 +249,7 @@ input.color-radio {
 }
 .scan-img {
   width: 100%;
+  height: 200px;
 }
 .del-scan {
   position: absolute;

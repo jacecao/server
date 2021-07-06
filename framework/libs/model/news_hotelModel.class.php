@@ -62,6 +62,8 @@
         $_id = 'hb_'.time();
         // 写入id
         $data['id'] = $_id;
+        // 写入创建时间
+        $data['createdate'] = date('Y-m-d H:i:s');
         // 写入数据库
         return DB::insert($this->news_table, $data);
       }
@@ -75,6 +77,8 @@
         $_id = 'hb_'.time();
         // 写入id
         $data['id'] = $_id;
+        // 写入创建时间
+        $data['createdate'] = date('Y-m-d H:i:s');
         // 写入数据库
         return DB::insert($this->hotel_table, $data);
       }
@@ -88,6 +92,8 @@
         $_id = 'hb_'.time();
         // 写入id
         $data['id'] = $_id;
+        // 写入创建
+        $data['createdate'] = date('Y-m-d H:i:s');
         // 写入数据库
         return DB::insert($this->autumn_hotel_table, $data);
       }
@@ -187,7 +193,7 @@
         $sql = 'SELECT `topvalue` FROM '.$this->$table_name.' WHERE `id` = "'.$id.'"';
         // 获取topvalue字段值
         try {
-          $_top_value = (int)(DB::findOne($sql)['topvalue']);
+          $_top_value = (int)(DB::findOne($sql).topvalue);
           if ($data_count == 1 && $_max_top_value == $_top_value) { // 如果当前置顶的值已经是最大的值，那么不做任何操作直接返回
             return 1;
           } else {

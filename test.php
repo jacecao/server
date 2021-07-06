@@ -31,7 +31,7 @@ try {
 } catch (PDOException $e){
 	echo '连接失败'.$e->getMessage();
 }
-*/
+
 $_arr = array();
 
 $_arr['key'] = 1;
@@ -78,3 +78,14 @@ function compare_key($a, $b) {
 uksort($_test_arr, 'compare_key');
 
 var_dump($_test_arr);
+
+
+*/
+echo '<hr/>';
+echo date_default_timezone_get();
+echo '<br/>';
+date_default_timezone_set("PRC");
+echo date('Y-m-d H:i:s');
+
+
+
