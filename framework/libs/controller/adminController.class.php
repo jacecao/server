@@ -310,12 +310,12 @@
             break;
           case 'hotel':
             $newsModel = M('news_hotel');
-            $_hotel_data = $newsModel->get_all_hotel();
+            $_hotel_data = $newsModel->get_online_hotel();
             empty($_hotel_data) ? '' : ($_data['hotel'] = $_hotel_data);
             break;
           case 'autumn_hotel':
             $newsModel = M('news_hotel');
-            $_autumn_hotel_data = $newsModel->get_all_autumn_hotel();
+            $_autumn_hotel_data = $newsModel->get_online_autumn_hotel();
             empty($_autumn_hotel_data ) ? '' : ($_data['hotel'] = $_autumn_hotel_data );
             break;
         }

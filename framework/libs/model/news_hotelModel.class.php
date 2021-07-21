@@ -391,7 +391,7 @@
 
     public function get_image_hotel ($max=8) {
       // 获取所有的新闻数据
-      $allHotel = $this->get_all_hotel();
+      $allHotel = $this->get_online_hotel();
       // 如果数据超过指定个数
       // 那么需要截取掉
       if (count($allHotel) > $max) {
@@ -403,7 +403,7 @@
     
     public function get_image_autumn_hotel ($max=8) {
       // 获取所有的新闻数据
-      $allHotel = $this->get_all_autumn_hotel();
+      $allHotel = $this->get_online_autumn_hotel();
       // 如果数据超过指定个数
       // 那么需要截取掉
       if (count($allHotel) > $max) {
