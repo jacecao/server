@@ -6,7 +6,7 @@
         <th class="text-center">编号</th>
         <th class="text-center">标题</th>
         <th class="text-center">作者</th>
-        <th class="text-center">添加时间</th>
+        <th class="text-center">创建时间</th>
         <th class="text-center">管理</th>
       </tr>
     </thead>
@@ -18,7 +18,7 @@
         <td>{$one.title}</td>
         <td>{$one.username}</td>
         <td>{$one.createdate}</td>
-        <td style="width: 30%;">
+        <td style="width: 40%;">
           <button class="btn btn-default news-edit" type="button" data-id="{$one.id}">编辑</button>
         {if $one.status == 0}
           <button class="btn btn-warning news-recovery" type="button" data-id="{$one.id}">恢复</button>

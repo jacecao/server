@@ -6,7 +6,7 @@
         <th class="text-center">编号</th>
         <th class="text-center">名字</th>
         <th class="text-center">作者</th>
-        <th class="text-center">添加时间</th>
+        <th class="text-center">创建时间</th>
         <th class="text-center">管理</th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
           <td>{$one@iteration}</td>
           <td>{$one.name}</td>
           <td>{$one.username}</td>
-          <td>{$one.date}</td>
+          <td>{$one.createdate}</td>
           <td>
             <button class="btn btn-default hotel-edit" type="button" data-id="{$one.id}">编辑</button>
             <button class="btn btn-warning hotel-del" type="button" data-id="{$one.id}">删除</button>
