@@ -54,6 +54,9 @@ var URL = {
   sub_qiu_huizhan: PATH + '/enter/main.php?controller=data&method=qiu_huizhan_sub',
 
   // 获取新闻录制界面
+  tjhzsPostImgAdd: PATH + '/enter/main.php?controller=admin&method=view&view=tjhzsPostImg',
+
+  // 获取新闻录制界面
   newsAdd: PATH + '/enter/main.php?controller=admin&method=view&view=news',
   // 新闻列表界面
   newsList: PATH + '/enter/main.php?controller=admin&method=list_win&list=news',
@@ -157,4 +160,10 @@ var URL = {
   getImgsByCat: PATH + '/enter/main.php?controller=admin&method=imglist&type=1&dir=',
   // 删除图片
   deleteImg: PATH + '/enter/main.php?controller=data&method=imgDelete',
+
+  // 春季酒店模块显示控制
+  show_spring_hotel: PATH + '/enter/main.php?controller=display&method=display_spring_hotel',
+
+  // 秋季酒店模块显示控制
+  show_autumn_hotel: PATH + '/enter/main.php?controller=display&method=display_autumn_hotel',
 };

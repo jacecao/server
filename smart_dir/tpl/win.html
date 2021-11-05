@@ -1,4 +1,4 @@
-<div class="win-left">
+<div class="win-left" id="tjhzs-win-left">
     <!-- 左侧竖直菜单折叠 -->
     <div class="btn-group-vertical" role="group" aria-label="...">
       <!-- 展会信息编辑 -->
@@ -11,6 +11,7 @@
       <button class="left-menu btn btn-primary" type="button" data-toggle="collapse" data-target="#news" aria-expanded="false" aria-controls="news">新闻管理<span class="glyphicon glyphicon-chevron-down icon-down"></span></button>
       <div class="collapse" id="news">
         <div class="btn-group-vertical vertical-menu" role="group" aria-label="...">
+          <a class="btn btn-default add-tjhzs-post-img" href="javascript:;">首页图片展示</a>
           <a class="btn btn-default add-news" href="javascript:;">添加新闻</a>
           <a class="btn btn-default list-news" href="javascript:;">管理线上新闻</a>
           {if $user['power'] === 'root'}
@@ -80,7 +81,7 @@
     </div>
 </div>
 
-<div class="win-right control-win">
+<div class="win-right control-win" id="tjhzs-win-right">
     <div class="result">
       <h3>网站信息</h3>
       <hr>
@@ -98,3 +99,4 @@
 </div>
 <script src="./static/js/base.js"></script>
 <script src="./static/js/mainform.js"></script>
+<script src="./static/js/control_new2021.js"></script>

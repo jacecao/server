@@ -158,5 +158,31 @@
       return file_put_contents($filepath, $json_string);
     }
 
+    // 将数据部分写入json文件
+    // $filename 文件名称
+    // $data 第一个是需要替换的字段、 替换的值
+    public function writePartJson ($filename, $data) {
+      $path = self::$path.self::$_json;
+      $filepath = $path.$filename.'.json';
+      $json_string = null;
+      if (file_exists($filepath)) {
+        // 从json文件中读取数据
+        $json_string = file_get_contents($filepath);
+        // 把json字符转换为PHP数组
+        $json_data = json_decode($json_string, true);
+        /* 
+        ** 修改数据
+        */
+        $json_data[$data[0]] = $data[1];
+        $json_string = json_encode($json_data);
+      /*
+      ** 第一次录入数据
+      */  
+      } else {
+        $json_string = json_encode(array($data[0]=>$data[1]));
+      }
+      echo file_put_contents($filepath, $json_string);
+    }
+
   }
 ?>

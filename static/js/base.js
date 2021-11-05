@@ -31,6 +31,9 @@ GetWin('.admin-list', URL.userList);
 // 导航条设置
 GetWin('.nav-set', URL.navSet);
 
+// 公司封面图片展示录入
+GetWin('.add-tjhzs-post-img', URL.tjhzsPostImgAdd);
+
 // 获取新闻录入
 GetWin('.add-news', URL.newsAdd);
 // 获取新闻列表

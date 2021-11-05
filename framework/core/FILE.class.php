@@ -68,5 +68,11 @@
       return $res;
     }
 
+    // 将数据写入json文件
+    public static function writePartJson ($filename, $arr) {
+      $res = self::$fileclass->writePartJson($filename, $arr);
+      return $res;
+    }
+
   }
 ?>

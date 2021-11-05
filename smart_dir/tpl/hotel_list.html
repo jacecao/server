@@ -1,5 +1,16 @@
 <div class="hotels-list data-list">
   <h3>酒店信息列表</h3><hr>
+  <div class="form-group">
+    <label for="show_{$mark}hotel">是否在页面显示此项目</label>
+    <div class="time_box">
+      {if isset($display) && $display}
+      <input type="checkbox" class="checkbox_show" id="show_{$mark}_hotel" style="display: inline-block; height: 20px; width: 20px;" name="is_show_{$mark}_hotel" data-id="1" value="1" checked>
+      {else}
+      <input type="checkbox" class="checkbox_show" id="show_{$mark}_hotel" style="display:inline-block; height: 20px; width: 20px;" name="is_show_{$mark}_hotel" data-id="1" value="1">
+      {/if}
+      <i class="tip-info" style="color:;">(勾选此框在页面显示)</i>
+    </div>
+  </div><hr>
   <table class="table table-hover text-center">
     <thead>
       <tr>

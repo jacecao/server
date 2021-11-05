@@ -173,6 +173,12 @@
         VIEW::assign($dataArr);
       }
     }
+    // 获取JSON数据
+    private function get_json_data_only ($name) {
+      // 启动数据工程模型
+      $data = M('product');
+      return $data->read_json($name);
+    }
     // 获取指定信息数据
     // $name json文件名
     // $id  需要查找数据的id值
@@ -289,10 +295,11 @@
         $listname = $_GET['list'];
         // 初始数据值
         $_data = array();
-        // 计入当前管理员信息
+        // 存入当前管理员信息
         $_data['userinfo'] = $this->user['power'];
+        // 获取模块显示配置信息
+        $_display_set = $this->get_json_data_only('display_config');
         // 为不同的窗口获取不同的数据资源
-
         switch ($listname) {
           case 'job':
             $this->get_json_data('jobs');
@@ -312,11 +319,21 @@
             $newsModel = M('news_hotel');
             $_hotel_data = $newsModel->get_online_hotel();
             empty($_hotel_data) ? '' : ($_data['hotel'] = $_hotel_data);
+            // 添加标记，告诉后台这里是春季酒店信息
+            $_data['mark'] = 'spring';
+            // 添加显示信息
+            $_data['display'] = $_display_set['display_spring_hotel'];
             break;
           case 'autumn_hotel':
             $newsModel = M('news_hotel');
             $_autumn_hotel_data = $newsModel->get_online_autumn_hotel();
             empty($_autumn_hotel_data ) ? '' : ($_data['hotel'] = $_autumn_hotel_data );
+            // 这里依然复用酒店列表
+            $listname = "hotel";
+            // 添加标记，告诉后台这里是秋季酒店信息
+            $_data['mark'] = 'autumn';
+             // 添加显示信息
+            $_data['display'] = $_display_set['display_autumn_hotel'];
             break;
         }
         VIEW::assign($_data);

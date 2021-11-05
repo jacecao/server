@@ -1,5 +1,7 @@
 <?php
-  // # 后台入口文件
+  /* # 后台入口文件
+	** 加载主要配置文件 
+  */
   header('Content-type: text/html; charset=utf-8');
   ini_set('display_errors', 'On');
   date_default_timezone_set("PRC"); // 设置当前服务器时间时区
